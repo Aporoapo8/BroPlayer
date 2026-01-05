@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bro's Ultimate Player</title>
+    
+    <base href="/BroPlayer/" />
+
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    
+    <link href="Nobiru.styles.css" rel="stylesheet" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 読み込み中のローディング画面 */
+        .loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #121212; display: flex; justify-content: center; align-items: center; z-index: 9999; }
+        .spinner { width: 50px; height: 50px; border: 5px solid #333; border-top: 5px solid #ff4757; border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="loading-overlay">
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="." class="reload">Reload</a>
+        <span class="dismiss">🗙</span>
+    </div>
+
+    <script>
+        window.audioHelper = {
+            audio: null,
+            init: function (elementId) {
+                this.audio = document.getElementById(elementId);
+            },
+            play: function (url) {
+                if (url) {
+                    this.audio.src = url;
+                    this.audio.load();
+                }
+                this.audio.play();
+            },
+            pause: function () {
+                this.audio.pause();
+            },
+            setSpeed: function (val) {
+                this.audio.playbackRate = val;
+            },
+            setCurrentTime: function (val) {
+                this.audio.currentTime = val;
+            },
+            getCurrentTime: function () {
+                return this.audio.currentTime;
+            },
+            getDuration: function () {
+                return this.audio.duration;
+            },
+            setVolume: function (val) {
+                this.audio.volume = val;
+            }
+        };
+    </script>
+    <script src="_framework/blazor.webassembly.js"></script>
+</body>
+</html>
